@@ -1,12 +1,17 @@
 {
+  "advancements.kemono_teatime.final_disc.description": "Obtain ost_disc_21",
+  "advancements.kemono_teatime.final_disc.title": "Final Disc",
   "config.kemono_teatime.pity_state.desc": "Enable pity system for disc box.",
   "config.kemono_teatime.pity_threshold.desc": "Number of uses without disc21 before guarantee triggers",
   "config.kemono_teatime.replace_trader_with_peddler": "Replace Wandering Trader with Suichi.\nWhen enabled, Wandering Traders will be replaced by Suichi and their llamas will be removed.",
+  "death.attack.kemono_teatime.organ_failure": "%1$s died of organ failure",
   "entity.kemono_teatime.peddler": "Suichi",
   "item.kemono_teatime.advanced_toolkit": "Advanced Toolkit",
   "item.kemono_teatime.beginner_toolkit": "Beginner's Toolkit",
   "item.kemono_teatime.biscuit": "Biscuit",
+  "item.kemono_teatime.carrier": "Carrier",
   "item.kemono_teatime.deprecated_coin": "Deprecated Coin",
+  "item.kemono_teatime.empty_carrier": "Empty Carrier",
   "item.kemono_teatime.intermidiate_toolkit": "Intermediate Toolkit",
   "item.kemono_teatime.ost_box": "Kemono Teatime OST",
   "item.kemono_teatime.ost_disc_1": "01 - A cup of happiness",
@@ -56,5 +61,10 @@
   "itemGroup.kemono_teatime.blocks": "Kemonini TeaCraft: Blocks",
   "itemGroup.kemono_teatime.misc": "Kemonini TeaCraft: Miscs",
   "kemono_teatime.configuration.disc_box": "Disc Box",
-  "kemono_teatime.configuration.world_gen": "World Generations"
+  "kemono_teatime.configuration.key_mutator": "KeyMutator Gameplay",
+  "kemono_teatime.configuration.key_mutator.time_scale": "KeyMutator Gameplay - Time Scale",
+  "kemono_teatime.configuration.key_mutator.time_scale.tooltip": "Default flow is 45 days (1 step = 15 days).",
+  "kemono_teatime.configuration.world_gen": "World Generations",
+  "kemono_teatime.configuration.world_gen.carrier_chest_chance": "Carrier Chest Chance",
+  "kemono_teatime.configuration.world_gen.carrier_chest_chance.tooltip": "Chance for each chest loot table to contain a Carrier. 0.002 = 2 permille, 0 disables it."
 }

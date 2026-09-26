@@ -1,29 +1,26 @@
-import org.gradle.api.plugins.ExtensionAware
-import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.wrapper.Wrapper
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.language.jvm.tasks.ProcessResources
-import org.gradle.kotlin.dsl.withGroovyBuilder
 
 plugins {
     id("java-library")
     id("idea")
     id("maven-publish")
-    id("net.neoforged.gradle.userdev") version "7.1.21"
-    id("org.jetbrains.kotlin.jvm") version "2.3.20"
+    id("net.neoforged.moddev") version "2.0.146"
+    id("org.jetbrains.kotlin.jvm") version "2.4.20"
 }
 
-val minecraft_version: String by project
-val minecraft_version_range: String by project
-val neo_version: String by project
-val loader_version_range: String by project
-val mod_id: String by project
-val mod_name: String by project
-val mod_license: String by project
-val mod_version: String by project
-val mod_group_id: String by project
+val minecraft_version = providers.gradleProperty("minecraft_version").get()
+val minecraft_version_range = providers.gradleProperty("minecraft_version_range").get()
+val neo_version = providers.gradleProperty("neo_version").get()
+val loader_version_range = providers.gradleProperty("loader_version_range").get()
+val mod_id = providers.gradleProperty("mod_id").get()
+val mod_name = providers.gradleProperty("mod_name").get()
+val mod_license = providers.gradleProperty("mod_license").get()
+val mod_version = providers.gradleProperty("mod_version").get()
+val mod_group_id = providers.gradleProperty("mod_group_id").get()
 
 tasks.named<Wrapper>("wrapper").configure {
     distributionType = Wrapper.DistributionType.BIN
@@ -33,18 +30,24 @@ version = mod_version
 group = mod_group_id
 
 sourceSets.named("main") {
+    java.srcDir("src/datagen/kotlin")
     resources {
-        java.srcDir("src/datagen/kotlin")
-        resources.srcDir("src/generated/resources")
+        srcDir("src/generated/resources")
         exclude("**/*.bbmodel")
         exclude("src/generated/**/.cache")
     }
 }
 
 repositories {
+    mavenCentral()
     maven {
         name = "Kotlin for Forge"
         url = uri("https://thedarkcolour.github.io/KotlinForForge/")
+    }
+    gradlePluginPortal()
+    maven {
+        name = "neoforgedReleases"
+        url = uri("https://maven.neoforged.net/releases")
     }
 }
 
@@ -58,47 +61,56 @@ java {
     }
 }
 
-val runs = extensions.getByName("runs") as NamedDomainObjectContainer<*>
+neoForge {
+    version = neo_version
+    validateAccessTransformers = true
 
-runs.configureEach {
-    (this as ExtensionAware).withGroovyBuilder {
-        "systemProperty"("forge.logging.markers", "REGISTRIES")
-        "systemProperty"("forge.logging.console.level", "debug")
-        "modSource"(project.sourceSets["main"])
+    runs {
+        create("client") {
+            client()
+            systemProperty("neoforge.enabledGameTestNamespaces", mod_id)
+        }
+
+        create("server") {
+            server()
+            programArgument("--nogui")
+            systemProperty("neoforge.enabledGameTestNamespaces", mod_id)
+        }
+
+        create("gameTestServer") {
+            type = "gameTestServer"
+            systemProperty("neoforge.enabledGameTestNamespaces", mod_id)
+        }
+
+        create("clientData") {
+            clientData()
+            programArguments.addAll(
+                "--mod",
+                mod_id,
+                "--all",
+                "--output",
+                file("src/generated/resources/").absolutePath,
+                "--existing",
+                file("src/main/resources/").absolutePath,
+            )
+        }
+
+        configureEach {
+            systemProperty("forge.logging.markers", "REGISTRIES")
+            systemProperty("forge.logging.console.level", "debug")
+        }
+    }
+
+    mods {
+        create(mod_id) {
+            sourceSet(project.sourceSets.getByName("main"))
+        }
     }
 }
 
-runs.maybeCreate("client").withGroovyBuilder {
-    "systemProperty"("neoforge.enabledGameTestNamespaces", mod_id)
-}
-
-runs.maybeCreate("server").withGroovyBuilder {
-    "systemProperty"("neoforge.enabledGameTestNamespaces", mod_id)
-    "argument"("--nogui")
-}
-
-runs.maybeCreate("gameTestServer").withGroovyBuilder {
-    "systemProperty"("neoforge.enabledGameTestNamespaces", mod_id)
-}
-
-runs.maybeCreate("clientData").withGroovyBuilder {
-    "argument"("--mod")
-    "argument"(mod_id)
-    "argument"("--all")
-    "argument"("--output")
-    "argument"(file("src/generated/resources/").absolutePath)
-    "argument"("--existing")
-    "argument"(file("src/main/resources/").absolutePath)
-}
-
-configurations.named("runtimeClasspath") {
-    extendsFrom(configurations["localRuntime"])
-}
-
 dependencies {
-    implementation("net.neoforged:neoforge:$neo_version")
     implementation("org.jetbrains:annotations:15.0")
-    implementation("thedarkcolour:kotlinforforge-neoforge:6.2.0")
+    implementation("thedarkcolour:kotlinforforge-neoforge:6.3.0")
 }
 
 tasks.withType<ProcessResources>().configureEach {

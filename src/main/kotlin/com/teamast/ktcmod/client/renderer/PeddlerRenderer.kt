@@ -1,6 +1,7 @@
-package com.teamast.ktcmod.world.entity.peddler
+package com.teamast.ktcmod.client.renderer
 
 import com.teamast.ktcmod.KTCMod
+import com.teamast.ktcmod.world.entity.peddler.Peddler
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.model.geom.ModelLayers
 import net.minecraft.client.renderer.entity.EntityRendererProvider

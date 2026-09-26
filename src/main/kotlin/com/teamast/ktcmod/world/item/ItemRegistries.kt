@@ -1,13 +1,18 @@
 package com.teamast.ktcmod.world.item
 
 import com.teamast.ktcmod.KTCMod
+import com.teamast.ktcmod.sounds.SoundEvents as KTCSoundEvents
+import com.teamast.ktcmod.world.item.misc.ItemCarrier
 import com.teamast.ktcmod.world.item.misc.ItemOST
+import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.Identifier
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemUseAnimation
 import net.minecraft.world.item.JukeboxSong
 import net.minecraft.world.item.Rarity
+import net.minecraft.world.item.component.Consumable
 import net.neoforged.bus.api.IEventBus
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -32,6 +37,34 @@ object ItemRegistries {
         properties
             .stacksTo(DEFAULT_SPECIFIC_STACKSIZE)
             .rarity(Rarity.EPIC)
+    }
+
+    // 空的携带体：病毒携带体被食用后留下的空壳
+    // 必须声明在 CARRIER 之前：CARRIER 的属性里要用到它，而 DeferredRegister 按声明顺序注册
+    @JvmField
+    val EMPTY_CARRIER = ITEMS.registerSimpleItem("empty_carrier") { properties ->
+        properties
+            .stacksTo(SPECIAL_STACKSIZE)
+            .rarity(Rarity.COMMON)
+    }
+
+    // 病毒携带体：食用后给使用者挂上 I 级 KeyMutator（45 游戏日），并转化为空的携带体
+    @JvmField
+    val CARRIER = ITEMS.registerItem("carrier", ::ItemCarrier) { properties ->
+        properties
+            .stacksTo(SPECIAL_STACKSIZE)
+            .rarity(Rarity.RARE)
+            // 食用动作：EAT 动作 + 专属食用音效（当前是静音占位，见 sounds/SoundEvents.kt）；关闭碎屑粒子
+            .component(
+                DataComponents.CONSUMABLE,
+                Consumable.builder()
+                    .animation(ItemUseAnimation.EAT)
+                    .sound(KTCSoundEvents.CARRIER_USE)
+                    .hasConsumeParticles(false)
+                    .build()
+            )
+            // 食用完毕后本体转化为空的携带体
+            .usingConvertsTo(EMPTY_CARRIER.get())
     }
 
     @JvmField
@@ -78,4 +111,6 @@ object ItemRegistries {
     private const val DEFAULT_MAX_STACKSIZE = 64
     private const val DEFAULT_SPECIFIC_STACKSIZE = 16
     private const val MODIFIED_STACKSIZE = 4
+    private const val SPECIAL_STACKSIZE = 1
+
 }

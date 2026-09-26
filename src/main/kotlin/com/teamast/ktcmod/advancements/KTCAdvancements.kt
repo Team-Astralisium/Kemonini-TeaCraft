@@ -20,8 +20,7 @@ object KTCAdvancements {
     }
 
     private fun grantById(player: ServerPlayer, advancementId: Identifier) {
-        val holder = player.server.getAdvancements().get(advancementId) ?: return
+        val holder = player.level().getServer().getAdvancements().get(advancementId) ?: return
         player.advancements.award(holder, MANUAL_CRITERION)
     }
 }
-

@@ -32,6 +32,10 @@ PLEASE NOTE: Studio Lalala and FURYU Corporation haven't support, advertise or t
 All distributions, convergences and recreations of this mod must follow GNU LGPLv3 License.
 '''
 
+# Mixin 配置：去掉病毒携带体食用动画的后段抖动（仅客户端）
+[[mixins]]
+config="kemono_teatime.mixins.json"
+
 # The [[accessTransformers]] block allows you to declare where your AT file is.
 # If this block is omitted, a fallback attempt will be made to load an AT from META-INF/accesstransformer.cfg
 #[[accessTransformers]]

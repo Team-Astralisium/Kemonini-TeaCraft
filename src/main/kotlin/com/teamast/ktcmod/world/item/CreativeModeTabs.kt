@@ -20,6 +20,8 @@ object CreativeModeTabs {
             .icon { ItemRegistries.OST_BOX.toStack() }
             .displayItems { _, output ->
                 output.accept(ItemRegistries.OST_BOX.get())
+                output.accept(ItemRegistries.CARRIER.get())
+                output.accept(ItemRegistries.EMPTY_CARRIER.get())
                 ItemRegistries.MISC_ITEMS.values.forEach { output.accept(it.get()) }
                 ItemRegistries.DISCS.forEach { output.accept(it.get()) }
             }

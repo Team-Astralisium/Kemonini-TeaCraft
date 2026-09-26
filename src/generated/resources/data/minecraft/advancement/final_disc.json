@@ -1,0 +1,33 @@
+{
+  "criteria": {
+    "has_final_disc": {
+      "conditions": {
+        "items": [
+          {
+            "items": "kemono_teatime:ost_disc_21"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "minecraft:gui/advancements/backgrounds/adventure",
+    "description": {
+      "translate": "advancements.kemono_teatime.final_disc.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "kemono_teatime:ost_disc_21"
+    },
+    "title": {
+      "translate": "advancements.kemono_teatime.final_disc.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_final_disc"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

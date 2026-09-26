@@ -21,6 +21,10 @@ class KTCItemModelProvider(output: PackOutput) : ModelProvider(output, KTCMod.MO
         // OST盒模型
         itemModels.generateFlatItem(ItemRegistries.OST_BOX.get(), ModelTemplates.FLAT_ITEM)
 
+        // 病毒携带体与使用后的空壳
+        itemModels.generateFlatItem(ItemRegistries.CARRIER.get(), ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(ItemRegistries.EMPTY_CARRIER.get(), ModelTemplates.FLAT_ITEM)
+
         // 唱片模型
         for (index in 1..DISC_COUNT) {
             itemModels.generateFlatItem(ItemRegistries.getDisc(index).get(), ModelTemplates.FLAT_ITEM)

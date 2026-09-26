@@ -14,6 +14,9 @@ object EffectRegistries {
     @JvmField
     val KEY_MUTATOR = EFFECTS_REGISTER.register("key_mutator", ::KeyMutator)
 
+    @JvmField
+    val RESIDUAL = EFFECTS_REGISTER.register("residual", ::ResidualEffect)
+
     fun register(eventBus: IEventBus) {
         EFFECTS_REGISTER.register(eventBus)
     }

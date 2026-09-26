@@ -1,9 +1,14 @@
 {
+  "advancements.kemono_teatime.final_disc.description": "获得 ost_disc_21",
+  "advancements.kemono_teatime.final_disc.title": "终曲唱片",
+  "death.attack.kemono_teatime.organ_failure": "%1$s因器官衰竭而死",
   "entity.kemono_teatime.peddler": "什锦",
   "item.kemono_teatime.advanced_toolkit": "高级工具包",
   "item.kemono_teatime.beginner_toolkit": "新手工具包",
   "item.kemono_teatime.biscuit": "饼干",
+  "item.kemono_teatime.carrier": "携带体",
   "item.kemono_teatime.deprecated_coin": "废弃硬币",
+  "item.kemono_teatime.empty_carrier": "空的携带体",
   "item.kemono_teatime.intermidiate_toolkit": "中级工具包",
   "item.kemono_teatime.ost_box": "《兽娘红茶馆》原声带集",
   "item.kemono_teatime.ost_disc_1": "01 - A cup of happiness",
@@ -55,6 +60,9 @@
   "kemono_teatime.configuration.disc_box": "抽奖机制",
   "kemono_teatime.configuration.disc_box.button": "修改",
   "kemono_teatime.configuration.disc_box.tooltip": "如果你自认为你是欧皇，那么可以考虑关闭它。",
+  "kemono_teatime.configuration.key_mutator": "KeyMutator玩法",
+  "kemono_teatime.configuration.key_mutator.time_scale": "KeyMutator玩法 - 时间缩放",
+  "kemono_teatime.configuration.key_mutator.time_scale.tooltip": "默认流程为 45 天（1 档 = 15 天）",
   "kemono_teatime.configuration.pity_enabled": "启用保底机制",
   "kemono_teatime.configuration.pity_enabled.tooltip": "此选项默认开启",
   "kemono_teatime.configuration.pity_state.desc": "是否启用保底机制",
@@ -67,5 +75,7 @@
   "kemono_teatime.configuration.title": "兽娘红茶馆工艺 - 配置",
   "kemono_teatime.configuration.world_gen": "世界生成",
   "kemono_teatime.configuration.world_gen.button": "修改",
+  "kemono_teatime.configuration.world_gen.carrier_chest_chance": "携带体箱子生成概率",
+  "kemono_teatime.configuration.world_gen.carrier_chest_chance.tooltip": "每张箱子战利品表生成病毒携带体的概率。0.002 即 2‰，设为 0 可关闭。",
   "kemono_teatime.configuration.world_gen.tooltip": "此选项控制世界生成相关的机制。"
 }

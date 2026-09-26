@@ -14,8 +14,7 @@ import java.util.EnumSet
 import java.util.UUID
 
 class K(entityType: EntityType<out K>, level: Level) : PathfinderMob(entityType, level) {
-    // 塔儿总是跟随什锦
-    // 这是具体实现逻辑
+    // 跟随逻辑
     private var leaderUuid: UUID? = null
     private var cachedLeader: Peddler? = null
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {

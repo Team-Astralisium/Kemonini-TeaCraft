@@ -24,7 +24,7 @@ object MiscWorldEvents {
     fun onEntityJoinLevel(event: EntityJoinLevelEvent) {
         val entity = event.entity
 
-        // Only replace vanilla wandering traders; custom subclasses (like our Peddler) must be ignored
+        // Only replace vanilla wandering traders, Peddler must be ignored
         // to avoid recursive replacement loops when addFreshEntity triggers this event again.
         if (entity !is WanderingTrader || entity.type != EntityType.WANDERING_TRADER) {
             return

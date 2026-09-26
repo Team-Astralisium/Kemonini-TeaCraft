@@ -2,7 +2,7 @@
   "homepage": "https://team-astralisium.github.io/Kemonini-TeaCraft/",
   "26.1": {
     "0.2.0-alpha": "Moved to Kotlin for a better development experience.",
-    "0.2.3-alpha": "Contents filling and bug fixes.",
+    "0.2.3-alpha": "Contents filling and bug fixes."
   },
   "promos": {
     "26.1-latest": "999.999.999",
